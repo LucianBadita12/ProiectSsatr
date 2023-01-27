@@ -20,34 +20,34 @@ public class Account {
         this.moneyFormat = new DecimalFormat("'$'###,##0.00");
     }
 
-    public Account(int var1, int var2) {
+    public Account(int customerNumber, int pin) {
         this.input = new Scanner(System.in);
         this.moneyFormat = new DecimalFormat("'$'###,##0.00");
-        this.customerNumber = var1;
-        this.pinNumber = var2;
+        this.customerNumber = customerNumber;
+        this.pinNumber = pin;
     }
 
-    public Account(int var1, int var2, double var3, double var5) {
+    public Account(int customerNumber, int pin, double checkingBalance, double saving) {
         this.input = new Scanner(System.in);
         this.moneyFormat = new DecimalFormat("'$'###,##0.00");
-        this.customerNumber = var1;
-        this.pinNumber = var2;
-        this.checkingBalance = var3;
-        this.savingBalance = var5;
+        this.customerNumber = customerNumber;
+        this.pinNumber = pin;
+        this.checkingBalance = checkingBalance;
+        this.savingBalance = saving;
     }
 
-    public int setCustomerNumber(int var1) {
-        this.customerNumber = var1;
-        return var1;
+    public int setCustomerNumber(int customerNumber) {
+        this.customerNumber = customerNumber;
+        return customerNumber;
     }
 
     public int getCustomerNumber() {
         return this.customerNumber;
     }
 
-    public int setPinNumber(int var1) {
-        this.pinNumber = var1;
-        return var1;
+    public int setPinNumber(int pin) {
+        this.pinNumber = pin;
+        return pin;
     }
 
     public int getPinNumber() {
@@ -62,52 +62,52 @@ public class Account {
         return this.savingBalance;
     }
 
-    public double calcCheckingWithdraw(double var1) {
-        this.checkingBalance -= var1;
+    public double calcCheckingWithdraw(double checkingBalance) {
+        this.checkingBalance -= checkingBalance;
         return this.checkingBalance;
     }
 
-    public double calcSavingWithdraw(double var1) {
-        this.savingBalance -= var1;
+    public double calcSavingWithdraw(double savingBalance) {
+        this.savingBalance -= savingBalance;
         return this.savingBalance;
     }
 
-    public double calcCheckingDeposit(double var1) {
-        this.checkingBalance += var1;
+    public double calcCheckingDeposit(double checkingBalance) {
+        this.checkingBalance += checkingBalance;
         return this.checkingBalance;
     }
 
-    public double calcSavingDeposit(double var1) {
-        this.savingBalance += var1;
+    public double calcSavingDeposit(double savingBalance) {
+        this.savingBalance += savingBalance;
         return this.savingBalance;
     }
 
-    public void calcCheckTransfer(double var1) {
-        this.checkingBalance -= var1;
-        this.savingBalance += var1;
+    public void calcCheckTransfer(double value) {
+        this.checkingBalance -= value;
+        this.savingBalance += value;
     }
 
-    public void calcSavingTransfer(double var1) {
-        this.savingBalance -= var1;
-        this.checkingBalance += var1;
+    public void calcSavingTransfer(double value) {
+        this.savingBalance -= value;
+        this.checkingBalance += value;
     }
 
     public void getCheckingWithdrawInput() {
-        boolean var1 = false;
+        boolean isLogged = false;
 
-        while(!var1) {
+        while(!isLogged) {
             try {
                 System.out.println("\nCurrent Checkings Account Balance: " + this.moneyFormat.format(this.checkingBalance));
                 System.out.print("\nAmount you want to withdraw from Checkings Account: ");
-                double var2 = this.input.nextDouble();
-                if (this.checkingBalance - var2 >= 0.0 && var2 >= 0.0) {
-                    this.calcCheckingWithdraw(var2);
+                double amount = this.input.nextDouble();
+                if (this.checkingBalance - amount >= 0.0 && amount >= 0.0) {
+                    this.calcCheckingWithdraw(amount);
                     System.out.println("\nCurrent Checkings Account Balance: " + this.moneyFormat.format(this.checkingBalance));
-                    var1 = true;
+                    isLogged = true;
                 } else {
                     System.out.println("\nBalance Cannot be Negative.");
                 }
-            } catch (InputMismatchException var4) {
+            } catch (InputMismatchException inputMismatchException) {
                 System.out.println("\nInvalid Choice.");
                 this.input.next();
             }
@@ -116,21 +116,21 @@ public class Account {
     }
 
     public void getsavingWithdrawInput() {
-        boolean var1 = false;
+        boolean isLogged = false;
 
-        while(!var1) {
+        while(!isLogged) {
             try {
                 System.out.println("\nCurrent Savings Account Balance: " + this.moneyFormat.format(this.savingBalance));
                 System.out.print("\nAmount you want to withdraw from Savings Account: ");
-                double var2 = this.input.nextDouble();
-                if (this.savingBalance - var2 >= 0.0 && var2 >= 0.0) {
-                    this.calcSavingWithdraw(var2);
+                double amount = this.input.nextDouble();
+                if (this.savingBalance - amount >= 0.0 && amount >= 0.0) {
+                    this.calcSavingWithdraw(amount);
                     System.out.println("\nCurrent Savings Account Balance: " + this.moneyFormat.format(this.savingBalance));
-                    var1 = true;
+                    isLogged = true;
                 } else {
                     System.out.println("\nBalance Cannot Be Negative.");
                 }
-            } catch (InputMismatchException var4) {
+            } catch (InputMismatchException e) {
                 System.out.println("\nInvalid Choice.");
                 this.input.next();
             }
@@ -139,21 +139,21 @@ public class Account {
     }
 
     public void getCheckingDepositInput() {
-        boolean var1 = false;
+        boolean isLogged = false;
 
-        while(!var1) {
+        while(!isLogged) {
             try {
                 System.out.println("\nCurrent Checkings Account Balance: " + this.moneyFormat.format(this.checkingBalance));
                 System.out.print("\nAmount you want to deposit from Checkings Account: ");
-                double var2 = this.input.nextDouble();
-                if (this.checkingBalance + var2 >= 0.0 && var2 >= 0.0) {
-                    this.calcCheckingDeposit(var2);
+                double amount = this.input.nextDouble();
+                if (this.checkingBalance + amount >= 0.0 && amount >= 0.0) {
+                    this.calcCheckingDeposit(amount);
                     System.out.println("\nCurrent Checkings Account Balance: " + this.moneyFormat.format(this.checkingBalance));
-                    var1 = true;
+                    isLogged = true;
                 } else {
                     System.out.println("\nBalance Cannot Be Negative.");
                 }
-            } catch (InputMismatchException var4) {
+            } catch (InputMismatchException inputMismatchException) {
                 System.out.println("\nInvalid Choice.");
                 this.input.next();
             }
@@ -162,21 +162,21 @@ public class Account {
     }
 
     public void getSavingDepositInput() {
-        boolean var1 = false;
+        boolean isLogged = false;
 
-        while(!var1) {
+        while(!isLogged) {
             try {
                 System.out.println("\nCurrent Savings Account Balance: " + this.moneyFormat.format(this.savingBalance));
                 System.out.print("\nAmount you want to deposit into your Savings Account: ");
-                double var2 = this.input.nextDouble();
-                if (this.savingBalance + var2 >= 0.0 && var2 >= 0.0) {
-                    this.calcSavingDeposit(var2);
+                double amount = this.input.nextDouble();
+                if (this.savingBalance + amount >= 0.0 && amount >= 0.0) {
+                    this.calcSavingDeposit(amount);
                     System.out.println("\nCurrent Savings Account Balance: " + this.moneyFormat.format(this.savingBalance));
-                    var1 = true;
+                    isLogged = true;
                 } else {
                     System.out.println("\nBalance Cannot Be Negative.");
                 }
-            } catch (InputMismatchException var4) {
+            } catch (InputMismatchException mismatchException) {
                 System.out.println("\nInvalid Choice.");
                 this.input.next();
             }
@@ -184,29 +184,29 @@ public class Account {
 
     }
 
-    public void getTransferInput(String var1) {
-        boolean var2 = false;
+    public void getTransferInput(String value) {
+        boolean isLogged = false;
 
-        while(!var2) {
+        while(!isLogged) {
             try {
-                int var3;
-                double var4;
-                if (var1.equals("Checkings")) {
+                int optionSelected;
+                double amount;
+                if (value.equals("Checkings")) {
                     System.out.println("\nSelect an account you wish to tranfers funds to:");
                     System.out.println("1. Savings");
                     System.out.println("2. Exit");
                     System.out.print("\nChoice: ");
-                    var3 = this.input.nextInt();
-                    switch (var3) {
+                    optionSelected = this.input.nextInt();
+                    switch (optionSelected) {
                         case 1:
                             System.out.println("\nCurrent Checkings Account Balance: " + this.moneyFormat.format(this.checkingBalance));
                             System.out.print("\nAmount you want to deposit into your Savings Account: ");
-                            var4 = this.input.nextDouble();
-                            if (this.savingBalance + var4 >= 0.0 && this.checkingBalance - var4 >= 0.0 && var4 >= 0.0) {
-                                this.calcCheckTransfer(var4);
+                            amount = this.input.nextDouble();
+                            if (this.savingBalance + amount >= 0.0 && this.checkingBalance - amount >= 0.0 && amount >= 0.0) {
+                                this.calcCheckTransfer(amount);
                                 System.out.println("\nCurrent Savings Account Balance: " + this.moneyFormat.format(this.savingBalance));
                                 System.out.println("\nCurrent Checkings Account Balance: " + this.moneyFormat.format(this.checkingBalance));
-                                var2 = true;
+                                isLogged = true;
                                 break;
                             }
 
@@ -217,22 +217,22 @@ public class Account {
                         default:
                             System.out.println("\nInvalid Choice.");
                     }
-                } else if (var1.equals("Savings")) {
+                } else if (value.equals("Savings")) {
                     System.out.println("\nSelect an account you wish to tranfers funds to: ");
                     System.out.println("1. Checkings");
                     System.out.println("2. Exit");
                     System.out.print("\nChoice: ");
-                    var3 = this.input.nextInt();
-                    switch (var3) {
+                    optionSelected = this.input.nextInt();
+                    switch (optionSelected) {
                         case 1:
                             System.out.println("\nCurrent Savings Account Balance: " + this.moneyFormat.format(this.savingBalance));
                             System.out.print("\nAmount you want to deposit into your savings account: ");
-                            var4 = this.input.nextDouble();
-                            if (this.checkingBalance + var4 >= 0.0 && this.savingBalance - var4 >= 0.0 && var4 >= 0.0) {
-                                this.calcSavingTransfer(var4);
+                            amount = this.input.nextDouble();
+                            if (this.checkingBalance + amount >= 0.0 && this.savingBalance - amount >= 0.0 && amount >= 0.0) {
+                                this.calcSavingTransfer(amount);
                                 System.out.println("\nCurrent checkings account balance: " + this.moneyFormat.format(this.checkingBalance));
                                 System.out.println("\nCurrent savings account balance: " + this.moneyFormat.format(this.savingBalance));
-                                var2 = true;
+                                isLogged = true;
                                 break;
                             }
 
@@ -244,7 +244,7 @@ public class Account {
                             System.out.println("\nInvalid Choice.");
                     }
                 }
-            } catch (InputMismatchException var6) {
+            } catch (InputMismatchException mismatchException) {
                 System.out.println("\nInvalid Choice.");
                 this.input.next();
             }

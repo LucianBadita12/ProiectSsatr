@@ -1,10 +1,10 @@
 import java.io.IOException;
 
 public class Main {
-    public static void main(String[] var0) throws IOException {
-        OptionMenu var1 = new OptionMenu();
+    public static void main(String[] args) throws IOException {
+        OptionMenu optionMenu = new OptionMenu();
         introduction();
-        var1.mainMenu();
+        optionMenu.mainMenu();
     }
 
     public static void introduction() {
